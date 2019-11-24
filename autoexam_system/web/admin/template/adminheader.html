@@ -1,0 +1,57 @@
+<script src="../js/moyuDialog/dialog.js"></script>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">考友无忧 —— 管理员界面</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <a role="button" class="btn btn-danger navbar-btn navbar-right" style="margin-right: 2px" id="btn-exit"><span class="glyphicon glyphicon-off"></span> 退出</a>
+            <div class="navbar-form navbar-right" style="display: none">
+                <select class="form-control">
+                    <option>题库搜索</option>
+                    <option>用户搜索</option>
+                </select>
+                <div class="input-group">
+                <input id="input-search" type="text" class="form-control" placeholder="搜索...">
+                <span class="input-group-btn">
+                <button id="btn-search" class="btn btn-default" type="button">Go!</button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<script>
+    $(function () {
+        $("#input-search").keydown(function(e){
+            if(e!=null&& e.keyCode==13)
+                $("#btn-search").click();
+        });
+        $("#btn-search").click(function(){
+
+        });
+        $("#btn-exit").click(function(){
+            $.moyuConfirm("是否确定退出？", function () {
+                $.ajax({
+                    method: "GET",
+                    url: "../ajax/adminStart.jsp",
+                    data: {
+                        act: 'exit'
+                    }
+                })
+                location.href = "../";
+            })
+        });
+        function centerModals(){
+            $('.modal').each(function(i){
+                var $clone = $(this).clone().css('display', 'block').appendTo('body');
+                var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2)-20;
+                top = top > 0 ? top : 0;
+                $clone.remove();
+                $(this).find('.modal-content').css("margin-top", top);
+            });
+        }
+        $(window).on('resize',centerModals);
+    })
+
+</script>

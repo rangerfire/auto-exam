@@ -1,0 +1,37 @@
+ [org.hibernate.cfg.annotations.Version] - Hibernate Annotations 3.5.5-Final
+2015-12-02 20:10:59,522 [localhost-startStop-1] INFO  [org.hibernate.cfg.Environment] - Hibernate 3.5.5-Final
+2015-12-02 20:10:59,526 [localhost-startStop-1] INFO  [org.hibernate.cfg.Environment] - hibernate.properties not found
+2015-12-02 20:10:59,534 [localhost-startStop-1] INFO  [org.hibernate.cfg.Environment] - Bytecode provider name : javassist
+2015-12-02 20:10:59,538 [localhost-startStop-1] INFO  [org.hibernate.cfg.Environment] - using JDK 1.4 java.sql.Timestamp handling
+2015-12-02 20:10:59,746 [localhost-startStop-1] INFO  [org.hibernate.annotations.common.Version] - Hibernate Commons Annotations 3.2.0.Final
+2015-12-02 20:10:59,918 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.hr.entity.resume.BKResume
+2015-12-02 20:10:59,954 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.hr.entity.resume.BKResume on table bk_resume
+2015-12-02 20:11:00,026 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.menu.BusinessSystem
+2015-12-02 20:11:00,026 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.menu.BusinessSystem on table business_system
+2015-12-02 20:11:00,066 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.menu.Menus
+2015-12-02 20:11:00,066 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.menu.Menus on table bk_menus
+2015-12-02 20:11:00,082 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.menu.MenusResource
+2015-12-02 20:11:00,082 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.menu.MenusResource on table menus_resource
+2015-12-02 20:11:00,082 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.org.OrgInfo
+2015-12-02 20:11:00,082 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.org.OrgInfo on table org_info
+2015-12-02 20:11:00,086 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.privilege.PrivilegeInfo
+2015-12-02 20:11:00,090 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.privilege.PrivilegeInfo on table bk_privilege_info
+2015-12-02 20:11:00,094 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.privilege.PrivilegeResourceInfo
+2015-12-02 20:11:00,094 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.privilege.PrivilegeResourceInfo on table privilege_resource_info
+2015-12-02 20:11:00,098 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.privilege.PrivilegeTypeInfo
+2015-12-02 20:11:00,098 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.privilege.PrivilegeTypeInfo on table bk_privilege_type_info
+2015-12-02 20:11:00,102 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.role.Role
+2015-12-02 20:11:00,102 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.role.Role on table bk_role
+2015-12-02 20:11:00,106 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.role.RolePrivilegeInfo
+2015-12-02 20:11:00,106 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.role.RolePrivilegeInfo on table bk_role_privilege_info
+2015-12-02 20:11:00,110 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.role.RoleType
+2015-12-02 20:11:00,110 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.role.RoleType on table bk_role_type
+2015-12-02 20:11:00,114 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.role.RoleUser
+2015-12-02 20:11:00,114 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.role.RoleUser on table bk_role_user
+2015-12-02 20:11:00,118 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.user.User
+2015-12-02 20:11:00,118 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.user.User on table bk_user
+2015-12-02 20:11:00,122 [localhost-startStop-1] INFO  [org.hibernate.cfg.AnnotationBinder] - Binding entity from annotated class: cn.com.bankaiit.system.entity.user.UserBusinessInfo
+2015-12-02 20:11:00,122 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.EntityBinder] - Bind entity cn.com.bankaiit.system.entity.user.UserBusinessInfo on table bk_user_business_info
+2015-12-02 20:11:00,238 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.CollectionBinder] - Mapping collection: cn.com.bankaiit.system.entity.menu.BusinessSystem.menus -> bk_menus
+2015-12-02 20:11:00,242 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.CollectionBinder] - Mapping collection: cn.com.bankaiit.system.entity.menu.BusinessSystem.userBusinessInfos -> bk_user_business_info
+2015-12-02 20:11:00,242 [localhost-startStop-1] INFO  [org.hibernate.cfg.annotations.CollectionB

@@ -1,0 +1,91 @@
+
+<button type="button" style="display:none" data-toggle="modal" data-target="#imgModal"></button>
+<div id="imgModal" class="modal in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <img src="" onmousewheel="return MousewheelHandle($(this))" onclick="$('[data-target=#imgModal]').click()"
+         style="cursor: zoom-out; margin: 0 auto; transition:all .2s ease-in;"/>
+</div>
+<script>
+    centerImg=function () {
+        $('#imgModal img,video').each(function(i){
+            var iv = $(this).attr('scale',1).css({
+                transform:'scale(1)',
+                width:'',
+                height:''
+            });
+            var imgModal = $('#imgModal');
+            var top = Math.round((imgModal.height() - iv.height()) / 2);
+            var left = Math.round((imgModal.width() - iv.width()) / 2);
+            if(top<=0){
+                iv.height(imgModal.height());
+                top = 0;
+            }
+            if(left<=0){
+                iv.css('width',imgModal.width());
+                left = 0;
+            }
+
+            iv.css({
+                "margin-top": top,
+                'margin-left':left
+            });
+        });
+    }
+
+    $.fn.MediaShow=function (afterLoad){
+        var _this = $(this)
+        var t= _this.find('video,img');
+        if(t.length==0)
+            afterLoad()
+        else
+            t.each(function () {
+                var tag = $(this).prop('tagName');
+                if(tag=='IMG'){
+                    $(this).on('load', function () {
+                        //image has already loaded,so it's width & height is correct
+                        var w = _this.width(),
+                            h = _this.height();
+                        if($(this).width()>w-20)
+                            $(this).width(w -20)
+                        $(this).css('cursor', 'zoom-in');
+                        var __this = $(this)
+                        $(this).click(function () {
+                            $(window).on('resize', centerImg)
+                            $('#imgModal').find(tag).attr('src',__this.attr('src'));
+                            $('[data-target=#imgModal]').click();
+                            $(window).resize()
+                        })
+                        afterLoad()
+                    })
+                }else{
+                    var w = _this.width();
+                    if($(this).width()>w-20)
+                        $(this).width(w - 20)
+                }
+            })
+    }
+
+    MousewheelHandle = function (_this) {
+
+        var delta = event.wheelDelta?event.wheelDelta:event.delta;
+        //down:delta <0
+//        var w,h;
+        var scale=Number(_this.attr('scale'));
+        if(delta<0)
+            scale-=0.1;
+//            w=_this.width() * 0.9,h=_this.height() * 0.9;
+        else
+            scale+=0.1;
+        if(scale>=2.1||scale<=0.4) return false;
+//            _this.css('transform','scale(.9)');
+        _this.attr('scale',scale);
+
+        _this.css({
+            'transform':'scale('+scale+')'
+        });
+
+        return false;
+//        _this.animate({},200);
+    }
+
+
+</script>

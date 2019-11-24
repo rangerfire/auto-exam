@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/dbpool" auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/auto_exam_system"
+              username="root"
+              password="110114"
+              maxActive="50"
+              maxIdle="30"
+              maxWait="10000" />
+</Context>

@@ -1,0 +1,38 @@
+<style type="text/css">
+    #btn {width:40px; height:40px; position:fixed; bottom:10px; display:none;
+        background:url(images/top_bg.png) no-repeat left top; }
+    #btn:hover {background:url(images/top_bg.png) no-repeat 0 -39px;}
+</style>
+<a href="javascript:;" onclick="pageScroll();return false" id="btn" title="回到顶部" style="display: block;"></a>
+<script>
+    function pageScroll() {
+        window.scrollBy(0, -500);
+        var scrolldelay = setTimeout('pageScroll()', 10);
+        var t;
+        if(window.pageYOffset)
+            t = window.pageYOffset;
+        else
+            t = document.body.scrollTop
+        if(t<=20)
+            clearTimeout(scrolldelay);
+    }
+    window.onscroll=function () {
+        var btn=$("#btn");
+        if(window.scrollY<=700)
+            btn.slideUp("normal");
+        else
+            btn.slideDown("normal");
+    }
+    function alignTop(){
+        var containerWidth=$(".container").width();
+        var allWidth=$(document).width();
+        var innerWidth=$("#btn").width();
+        var blankWidth=(allWidth-containerWidth)/2;
+        var right=blankWidth-innerWidth-20;
+        right=right<0?0:right;
+        $("#btn").css("right",right);
+    };
+    alignTop()
+    $(window).on('resize', alignTop)
+    $("#btn").hide()
+</script>

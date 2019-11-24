@@ -1,0 +1,279 @@
+<%--
+Created by IntelliJ IDEA.
+User: Yc
+Date: 2015/9/26
+Time: 16:51
+To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<style>
+    [class^=col-lg]{
+        float:left;
+    }
+    .col-lg-1{
+        /*width: 5%;*/
+    }
+    .col-lg-4{
+        width: 45%;
+    }
+</style>
+
+<br>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5 form-group">
+        <div id="dlg-alert-user" style="display: none;" class="alert alert-warning text-center" role="alert">
+            <button type="button" onclick="$('#dlg-alert-user').hide('normal')" class="close"><span aria-hidden="true">&times;</span></button>
+            <big>请按照要求输入（6-12位，不含中文与空格）！</big></div>
+        <div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input id="input-search-username" type="text" class="form-control" placeholder="输入待修改的用户名">
+                    <span class="input-group-btn">
+                    <button id="btn-search-username" class="btn btn-primary" type="button">查找</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="search-user-result" style="display: none;">
+            <div>当前待修改用户名 <label class="text-danger" id="pre-username"></label></div><br>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    &nbsp;用&nbsp;户&nbsp;名&nbsp;
+                    </span>
+                    <input id="change-username1" type="text" class="form-control" placeholder="输入修改后的用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    电子邮箱
+                    </span>
+                    <input id="change-email1" type="text" class="form-control" placeholder="输入修改后的电子邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    登录密码
+                    </span>
+                    <input id="change-password1" type="text" class="form-control" placeholder="输入修改后的密码">
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button id="btn-change-user" class="btn btn-block btn-lg btn-primary">确定修改</button>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-5 form-group">
+        <div id="dlg-alert-email" style="display: none;" class="alert alert-warning text-center" role="alert">
+            <button type="button" onclick="$('#dlg-alert-email').hide('normal')" class="close"><span aria-hidden="true">&times;</span></button>
+            <big>请按照要求输入！</big></div>
+        <div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <input id="input-search-email" type="text" class="form-control" placeholder="输入待修改的用户名邮箱">
+                    <span class="input-group-btn">
+                    <button id="btn-search-email" class="btn btn-primary" type="button">查找</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div id="search-email-result" style="display: none">
+            <div>当前待修改用户邮箱 <label class="text-danger" id="pre-email"></label></div><br>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    &nbsp;用&nbsp;户&nbsp;名&nbsp;
+                    </span>
+                    <input id="change-username2" type="text" class="form-control" placeholder="输入修改后的用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    电子邮箱
+                    </span>
+                    <input id="change-email2" type="text" class="form-control" placeholder="输入修改后的电子邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                    登录密码
+                    </span>
+                    <input id="change-password2" type="text" class="form-control" placeholder="输入修改后的密码">
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button id="btn-change-email" class="btn btn-block btn-lg btn-primary">确定修改</button>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#btn-change-user").click(function(){
+            if((!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#change-username1').val().trim()))
+                    ||(!/^\w+@\w+\.\w+$/.test($('#change-email1').val().trim()))
+                        ||(!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#change-password1').val().trim()))){
+                $("#dlg-alert-user").show("normal");
+                return;
+            }
+            $(this).prop("disabled",true);
+            $.ajax({
+                method:'POST',
+                url:'../ajax/adminDo.jsp',
+                data:{
+                    act:'changeUserByName',
+                    pre:$("#pre-username").text().trim(),
+                    username:$('#change-username1').val().trim(),
+                    email:$('#change-email1').val().trim(),
+                    password:$('#change-password1').val().trim()
+                }
+            }).done(function(d){
+                $("#btn-change-user").prop("disabled",false);
+                if(d==1)
+                    $.moyuAlert("更改成功")
+                else
+                    $.moyuAlert("更改失败")
+            })
+        });
+
+
+        $("#btn-change-email").click(function(){
+            if((!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#change-username2').val().trim()))
+                    ||(!/^\w+@\w+\.\w+$/.test($('#change-email2').val().trim()))
+                    ||(!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#change-password2').val().trim()))){
+                $("#dlg-alert-email").show("normal");
+                return;
+            }
+            $(this).prop("disabled",true);
+            $.ajax({
+                method:'POST',
+                url:'../ajax/adminDo.jsp',
+                data:{
+                    act:'changeUserByEmail',
+                    pre:$("#pre-email").text().trim(),
+                    username:$('#change-username2').val().trim(),
+                    email:$('#change-email2').val().trim(),
+                    password:$('#change-password2').val().trim()
+                }
+            }).done(function(d){
+                $("#btn-change-email").prop("disabled",false);
+                if(d==1)
+                    $.moyuAlert("更改成功")
+                else
+                    $.moyuAlert("更改失败")
+            })
+        });
+
+        $("#btn-search-username").click(function(){
+            if((!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#input-search-username').val().trim()))){
+                $("#dlg-alert-user").show("normal");
+                return;
+            }
+            $(this).prop("disabled",true);
+            $.ajax({
+                method:"POST",
+                url:"../ajax/adminDo.jsp",
+                data:{
+                    act:'getUserByName',
+                    username:$('#input-search-username').val().trim()
+                }
+            }).done(function(d){
+                $("#btn-search-username").prop("disabled",false);
+                console.log(d)
+                if(d==-1){
+                    $("#btn-search-username").popover({
+                        placement:'top',
+                        html:true,
+                        content:'<label style="color: red">该用户不存在！</label>',
+                        trigger:'manual',
+                        container:'body'
+                    }).popover('show');
+                }else{
+                    showResult1(JSON.parse(d))
+                }
+            })
+        }).on('shown.bs.popover', function () {
+            var t=$(this)
+            setTimeout(function(){
+                t.popover('hide')
+            },2000)
+        })
+
+        $("#input-search-username").keydown(function(e){
+            if(e!=null && e.keyCode==13)
+                $("#btn-search-username").click();
+        })
+        $("#input-search-email").keydown(function(e){
+            if(e!=null && e.keyCode==13)
+                $("#btn-search-email").click();
+        })
+
+        $("#btn-search-email").click(function(){
+            if((!/^\w+@\w+\.\w+$/.test($('#input-search-email').val().trim()))){
+                $("#dlg-alert-email").show("normal");
+                return;
+            }
+            $(this).prop("disabled",true);
+            $.ajax({
+                method:"POST",
+                url:"../ajax/adminDo.jsp",
+                data:{
+                    act:'getUserByEmail',
+                    email:$('#input-search-email').val().trim()
+                }
+            }).done(function(d){
+                console.log(d)
+                $("#btn-search-email").prop("disabled",false);
+                if(d==-1){
+                    $("#btn-search-email").popover({
+                        placement:'top',
+                        html:true,
+                        content:'<label style="color: red">该邮箱不存在！</label>',
+                        trigger:'manual',
+                        container:'body'
+                    }).popover('show');
+                }else{
+                    showResult2(JSON.parse(d))
+                }
+            })
+        }).on('shown.bs.popover', function () {
+            var t=$(this)
+            setTimeout(function(){
+                t.popover('hide')
+            },2000)
+        })
+
+        $("#input-search-username").keydown(function(e){
+            if(e!=null && e.keyCode==13)
+                $("#btn-search-user").click();
+        })
+    })
+
+    //d.username   d.password   d.email  d.pre
+    function showResult1(d){
+        $("#pre-username").text(d.pre);
+        $("#change-username1").val(d.username);
+        $("#change-email1").val(d.email);
+        $("#change-password1").val(d.password);
+        $("#search-user-result").slideDown("normal");
+    }
+    function showResult2(d){
+        $("#pre-email").text(d.pre);
+        $("#change-username2").val(d.username);
+        $("#change-email2").val(d.email);
+        $("#change-password2").val(d.password);
+        $("#search-email-result").slideDown("normal");
+    }
+</script>

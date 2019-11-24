@@ -1,0 +1,102 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Yc
+  Date: 2015/9/26
+  Time: 16:51
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<br>
+<br>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 form-group">
+    <div id="dlg-alert" style="display: none;" class="alert alert-warning text-center" role="alert">
+      <button type="button" onclick="$('#dlg-alert').hide('normal')" class="close"><span aria-hidden="true">&times;</span></button>
+      <big>请按照要求输入！</big></div>
+    <div>
+      <div class="form-group">
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-user">
+        </span> 用&nbsp;户&nbsp;名&nbsp;
+        </span>
+        <input id="input-username" type="text" class="form-control" placeholder="输入用户名（6-12位，不含中文与空格）">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-envelope">
+        </span> 电子邮箱
+        </span>
+          <input id="input-email" type="email" class="form-control" placeholder="输入电子邮箱">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+        <span class="glyphicon glyphicon-lock">
+        </span> &nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;
+        </span>
+          <input id="input-password" type="text" class="form-control" placeholder="输入密码（6-12位，不含中文与空格）">
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button id="btn-add-user" class="btn btn-block btn-lg btn-primary">添加新用户</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $("#btn-add-user").click(function(){
+      $(this).on('shown.bs.popover', function () {
+        var t=$(this)
+        setTimeout(function(){
+          t.popover('destroy')
+        },2000)
+      })
+      if((!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#input-username').val().trim())
+              ||!/^[^\u4e00-\u9fa5\s]{6,12}$/.test($('#input-password').val().trim()))
+              ||!/^\w+@\w+\.\w+$/.test($('#input-email').val().trim())){
+        $("#dlg-alert").show("normal");
+        return;
+      }
+      $.ajax({
+        method:"POST",
+        url:"../ajax/adminDo.jsp",
+        data:{
+          act:'add-user',
+          username:$('#input-username').val().trim(),
+          email:$('#input-email').val().trim(),
+          password:$('#input-password').val().trim()
+        }
+      }).done(function(d){
+        console.log(d)
+        if(d==-1){
+          $("#btn-add-user").popover({
+            placement:'top',
+            html:true,
+            content:'<label style="color: red">用户名或者邮箱已经被注册</label>',
+            trigger:'manual',
+            container:'body'
+          }).popover('show');
+        }else{
+          $("#btn-add-user").popover({
+            placement:'top',
+            html:true,
+            content:'<label class="text-success">注册成功</label>',
+            trigger:'manual',
+            container:'body'
+          }).popover('show');
+        }
+      })
+    })
+    $(document).keydown(function(e){
+      if(e!=null && e.keyCode==13)
+        $("#btn-add-user").click();
+    })
+  })
+
+</script>
